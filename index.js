@@ -104,10 +104,3 @@ $("#generate").bind('click', function(){
 
 
 });
-
-
-// var draw = function(){
-// 	var now = (new Date()).getTime();
-// 	var timeDelta = now - startTime;
-// 	if( timeDelta )
-// }
