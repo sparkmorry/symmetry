@@ -5,7 +5,7 @@ var Gpos = [];
 var magic, ctx;
 
 var color = 'black';
-var width = 500, height=500;
+var width = 300, height=300;
 var angleRotate, drawTimer;
 
 function Point(x, y, ctime){
@@ -108,9 +108,10 @@ $.fn.drawMouse = function() {
     pos.push(new Point(0,0));
     count+=1;
   };
-  $(this).on("mousedown", start);
-  $(this).on("mousemove", move);
-  $(window).on("mouseup", stop);
+  var canvas = document.getElementById("canvas");
+  canvas.addEventListener('touchstart', start, false);
+  canvas.addEventListener('touchmove', move, false);
+  document.addEventListener('touchend', stop, false);
 };
 
 var draw = function(){
@@ -156,5 +157,7 @@ var draw = function(){
 //   } 
  
 // }
-
+$('body').bind('touchmove',function(event){
+  event.preventDefault();
+});
 init();
