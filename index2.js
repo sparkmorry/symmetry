@@ -63,6 +63,7 @@ var init = function(){
   magic = new Transform(num,width/2,height/2);
 
   $("#canvas").drawMouse();
+  $("#canvas").drawTouch();
 }
 $("#generate").bind('click', function(){
    for(var i=0;i<count;i++){
@@ -84,7 +85,7 @@ $("#generate").bind('click', function(){
    drawTimer = setInterval(draw, 40);
 });
 
-$.fn.drawMouse = function() {
+$.fn.drawTouch = function() {
   var clicked = 0;
   var start = function(e) {
     clicked = 1;
@@ -112,6 +113,35 @@ $.fn.drawMouse = function() {
   canvas.addEventListener('touchstart', start, false);
   canvas.addEventListener('touchmove', move, false);
   document.addEventListener('touchend', stop, false);
+};
+
+$.fn.drawMouse = function() {
+  var clicked = 0;
+  var start = function(e) {
+    clicked = 1;
+    ctx.beginPath();
+    x = e.pageX;
+    y = e.pageY;
+    ctx.moveTo(x,y);
+  };
+  var move = function(e) {
+    if(clicked){
+      x = e.pageX;
+      y = e.pageY;
+      pos.push(new Point(x,y));
+      count+=1;
+      ctx.lineTo(x,y);
+      ctx.stroke();
+    }
+  };
+  var stop = function(e) {
+    clicked=0;
+    pos.push(new Point(0,0));
+    count+=1;
+  };
+  $(this).on("mousedown", start);
+  $(this).on("mousemove", move);
+  $(window).on("mouseup", stop);
 };
 
 var draw = function(){
