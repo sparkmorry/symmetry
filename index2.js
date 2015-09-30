@@ -4,7 +4,8 @@ var pos = [];
 var Gpos = [];
 var magic, ctx;
 
-var color = 'rgba(255,255,255,0.7)';
+// var color = 'rgba(255,255,255,0.7)';
+var color = 'white';
 var width = 300, height=300;
 var angleRotate, drawTimer;
 
@@ -54,6 +55,7 @@ Transform.prototype.trans = function(x, y) {
 var init = function(){
   ctx=document.getElementById("canvas").getContext("2d");
   ctx.strokeStyle = color;
+  // ctx.fillStyle = color;
   ctx.lineJoin = "round";
   ctx.lineWidth = 1;  
   num=10;
@@ -75,7 +77,7 @@ $("#generate").bind('click', function(){
      }
      Gpos[i] = tmp;
    }
-   console.log(Gpos);
+   // console.log(Gpos);
    drawOn=true;
    Btime=(new Date()).getTime();
    drawTimer = setInterval(draw, 40);
@@ -94,11 +96,15 @@ $.fn.drawTouch = function() {
     if(clicked){
       ctx.beginPath();
       ctx.moveTo(x, y);
+      ctx.strokeStyle = color;
+
       ctx.lineCap = 'round';
       ctx.lineWidth = 2;
       ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
-      ctx.strokeStyle = 'white';
+      ctx.strokeStyle = color;
+      // ctx.globalAlpha = 0.2;
       ctx.stroke();
+      ctx.closePath();
       x = e.pageX - canvasX;
       y = e.pageY - canvasY;
       pos.push(new Point(x,y));
@@ -113,6 +119,8 @@ $.fn.drawTouch = function() {
     pos.push(new Point(0,0));
     count+=1;
   };
+
+
   var canvas = document.getElementById("canvas");
   canvas.addEventListener('touchstart', start, false);
   canvas.addEventListener('touchmove', move, false);
@@ -135,11 +143,15 @@ $.fn.drawMouse = function() {
     if(clicked){
       ctx.beginPath();
       ctx.moveTo(x, y);
+      ctx.strokeStyle = color;
+
       ctx.lineCap = 'round';
       ctx.lineWidth = 2;
       ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
-      ctx.strokeStyle = 'white';
+      ctx.strokeStyle = color;
+      // ctx.globalAlpha = 0.2;
       ctx.stroke();
+      ctx.closePath();
       x = e.pageX - canvasX;
       y = e.pageY - canvasY;
       pos.push(new Point(x,y));
