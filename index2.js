@@ -85,23 +85,31 @@ $.fn.drawTouch = function() {
   var clicked = 0;
   var start = function(e) {
     clicked = 1;
-    ctx.beginPath();
-    x = e.pageX;
-    y = e.pageY;
-    ctx.moveTo(x,y);
+    // ctx.beginPath();
+    x = e.pageX - canvasX;
+    y = e.pageY - canvasY;
+    // ctx.moveTo(x,y);
   };
   var move = function(e) {
     if(clicked){
-      x = e.pageX;
-      y = e.pageY;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 2;
+      ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
+      ctx.strokeStyle = 'white';
+      ctx.stroke();
+      x = e.pageX - canvasX;
+      y = e.pageY - canvasY;
       pos.push(new Point(x,y));
       count+=1;
-      ctx.lineTo(x,y);
-      ctx.stroke();
+
     }
   };
   var stop = function(e) {
     clicked=0;
+    ctx.closePath();
+
     pos.push(new Point(0,0));
     count+=1;
   };
@@ -115,28 +123,28 @@ $.fn.drawMouse = function() {
   var clicked = 0;
   var canvasX = document.getElementById("canvas").offsetLeft;
   var canvasY = document.getElementById("canvas").offsetTop;
-  ctx.lineJoin = "round";
-  ctx.lineCap = 'round';
-
-  ctx.lineWidth = 3;  
 
   var start = function(e) {
     clicked = 1;
-    ctx.beginPath();
+    // ctx.beginPath();
     x = e.pageX - canvasX;
     y = e.pageY - canvasY;
-    ctx.moveTo(x,y);
+    // ctx.moveTo(x,y);
   };
   var move = function(e) {
     if(clicked){
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 2;
+      ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
+      ctx.strokeStyle = 'white';
+      ctx.stroke();
       x = e.pageX - canvasX;
       y = e.pageY - canvasY;
       pos.push(new Point(x,y));
       count+=1;
-      ctx.lineCap = 'round';
-      ctx.lineTo(x,y);
-      // ctx.closePath();
-      ctx.stroke();
+
     }
   };
   var stop = function(e) {
