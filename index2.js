@@ -4,7 +4,7 @@ var pos = [];
 var Gpos = [];
 var magic, ctx;
 
-var color = 'black';
+var color = 'rgba(255,255,255,0.7)';
 var width = 300, height=300;
 var angleRotate, drawTimer;
 
@@ -71,11 +71,7 @@ $("#generate").bind('click', function(){
      var tmp = [];
      for(var j=0;j<num-1;j++){
         var pt = new Point(magic.posX[j], magic.posY[j], pos[i].ctime);
-        tmp.push(pt);
-        // console.log(pt);
-
-        // Gpos[i][j][1]=magic.posY[j]; 
-        // Gpos[i][j][2]=pos[i][2];   
+        tmp.push(pt); 
      }
      Gpos[i] = tmp;
    }
@@ -117,25 +113,36 @@ $.fn.drawTouch = function() {
 
 $.fn.drawMouse = function() {
   var clicked = 0;
+  var canvasX = document.getElementById("canvas").offsetLeft;
+  var canvasY = document.getElementById("canvas").offsetTop;
+  ctx.lineJoin = "round";
+  ctx.lineCap = 'round';
+
+  ctx.lineWidth = 3;  
+
   var start = function(e) {
     clicked = 1;
     ctx.beginPath();
-    x = e.pageX;
-    y = e.pageY;
+    x = e.pageX - canvasX;
+    y = e.pageY - canvasY;
     ctx.moveTo(x,y);
   };
   var move = function(e) {
     if(clicked){
-      x = e.pageX;
-      y = e.pageY;
+      x = e.pageX - canvasX;
+      y = e.pageY - canvasY;
       pos.push(new Point(x,y));
       count+=1;
+      ctx.lineCap = 'round';
       ctx.lineTo(x,y);
+      // ctx.closePath();
       ctx.stroke();
     }
   };
   var stop = function(e) {
     clicked=0;
+    ctx.closePath();
+
     pos.push(new Point(0,0));
     count+=1;
   };
