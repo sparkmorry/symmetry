@@ -185,15 +185,16 @@ var draw = function(){
       i+=1;
     }else if(drawOn&&(now-Btime>pos[i].ctime-pos[i-1].ctime)&&!((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
       for(var k=0;k<num-1;k++){
-     //   c=color(hue+(k+1)*360/num,255,255,150);
         ctx.beginPath();
         ctx.moveTo(Gpos[i][k].x, Gpos[i][k].y);
+        ctx.strokeStyle = color;
+
+        ctx.lineCap = 'round';
+        ctx.lineWidth = lineWidth;
         ctx.lineTo(Gpos[i-1][k].x, Gpos[i-1][k].y);
-        ctx.closePath();
+        ctx.strokeStyle = color;
         ctx.stroke();
-
-
-        // line(Gpos[i][k][0],Gpos[i][k][1],Gpos[i-1][k][0],Gpos[i-1][k][1]);
+        ctx.closePath();
       }
       i+=1;
     }
@@ -201,24 +202,6 @@ var draw = function(){
     clearInterval(drawTimer);
   }   
 }
-// void draw(){
- 
-//   if(drawOn){
-//     if(i>=count){
-//       drawOn=false;  
-//     }else if(drawOn&&(millis()-Btime>pos[i][2]-pos[i-1][2])&&((pos[i-1][0]==0&&pos[i-1][1]==0)||(pos[i][0]==0&&pos[i][1]==0))){
-//       i+=1;
-//     }else if(drawOn&&(millis()-Btime>pos[i][2]-pos[i-1][2])&&!((pos[i-1][0]==0&&pos[i-1][1]==0)||(pos[i][0]==0&&pos[i][1]==0))){
-//       for(int k=0;k<num-1;k++){
-//      //   c=color(hue+(k+1)*360/num,255,255,150);
-       
-//         line(Gpos[i][k][0],Gpos[i][k][1],Gpos[i-1][k][0],Gpos[i-1][k][1]);
-//       }
-//       i+=1;
-//     }
-//   } 
- 
-// }
 $('#canvas').bind('touchmove',function(event){
   event.preventDefault();
 });
