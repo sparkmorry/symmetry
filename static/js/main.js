@@ -85,6 +85,9 @@ $("#generate").bind('click', function(){
 
 $.fn.drawTouch = function() {
   var clicked = 0;
+  var canvasX = document.getElementById("canvas").offsetLeft;
+  var canvasY = document.getElementById("canvas").offsetTop;
+
   var start = function(e) {
     clicked = 1;
     // ctx.beginPath();
