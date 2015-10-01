@@ -3,10 +3,14 @@ var drawOn, Btime;
 var pos = [];
 var Gpos = [];
 var magic, ctx;
+var lineWidth = 1;
+var canvas = document.getElementById("canvas");
 
 // var color = 'rgba(255,255,255,0.7)';
 var color = 'white';
-var width = 300, height=300;
+var windowW = $(window).width();
+
+var width = windowW, height=windowW;
 var angleRotate, drawTimer;
 
 function Point(x, y, ctime){
@@ -53,22 +57,25 @@ Transform.prototype.trans = function(x, y) {
 };
 
 var init = function(){
-  ctx=document.getElementById("canvas").getContext("2d");
+
+  ctx=canvas.getContext("2d");
+  canvas.width = width;
+  canvas.height = height;
   ctx.strokeStyle = color;
   // ctx.fillStyle = color;
   ctx.lineJoin = "round";
-  ctx.lineWidth = 1;  
+  ctx.lineWidth = lineWidth;  
   num=10;
   i=1;
   count=0;
-  angleRotate=2*Math.PI/num;
-  magic = new Transform(num,width/2,height/2);
 
   $("#canvas").drawMouse();
   $("#canvas").drawTouch();
 }
 $("#generate").bind('click', function(){
-   for(var i=0;i<count;i++){
+  angleRotate=2*Math.PI/num;
+  magic = new Transform(num,width/2,height/2);
+    for(var i=0;i<count;i++){
      magic.trans(pos[i].x,pos[i].y);
      var tmp = [];
      for(var j=0;j<num-1;j++){
@@ -90,10 +97,8 @@ $.fn.drawTouch = function() {
 
   var start = function(e) {
     clicked = 1;
-    // ctx.beginPath();
     x = e.pageX - canvasX;
     y = e.pageY - canvasY;
-    // ctx.moveTo(x,y);
   };
   var move = function(e) {
     if(clicked){
@@ -102,7 +107,7 @@ $.fn.drawTouch = function() {
       ctx.strokeStyle = color;
 
       ctx.lineCap = 'round';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = lineWidth;
       ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
       ctx.strokeStyle = color;
       // ctx.globalAlpha = 0.2;
@@ -124,7 +129,6 @@ $.fn.drawTouch = function() {
   };
 
 
-  var canvas = document.getElementById("canvas");
   canvas.addEventListener('touchstart', start, false);
   canvas.addEventListener('touchmove', move, false);
   document.addEventListener('touchend', stop, false);
@@ -137,10 +141,8 @@ $.fn.drawMouse = function() {
 
   var start = function(e) {
     clicked = 1;
-    // ctx.beginPath();
     x = e.pageX - canvasX;
     y = e.pageY - canvasY;
-    // ctx.moveTo(x,y);
   };
   var move = function(e) {
     if(clicked){
@@ -149,7 +151,7 @@ $.fn.drawMouse = function() {
       ctx.strokeStyle = color;
 
       ctx.lineCap = 'round';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = lineWidth;
       ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
       ctx.strokeStyle = color;
       // ctx.globalAlpha = 0.2;
@@ -221,3 +223,14 @@ $('body').bind('touchmove',function(event){
   event.preventDefault();
 });
 init();
+
+var jQline = $("#j-line"), jQnum = $("#j-num")
+$("#j-line-input").bind('change', function(){
+  lineWidth = parseInt($(this).val());
+  jQline.text(lineWidth);
+});
+
+$("#j-num-input").bind('change', function(){
+  num = parseInt($(this).val());
+  jQnum.text(num);
+});

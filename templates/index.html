@@ -5,12 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
     <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
     	#canvas{
    			border:solid 1px black;
                 margin: auto;
-                width: 300px;
+                /*width: 300px;*/
                 display: block;  
-                background: black;  	
+                background: black;  
+                margin-top: 10px;	
             }
         #generate{
             margin-top: 30px;
@@ -24,11 +29,18 @@
             background: black;
             text-align: center;
         }
+        p{
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-	<canvas id="canvas" width="300" height="300"></canvas>
+	<canvas id="canvas"></canvas>
+    <p><input type="range" value="1" id="j-line-input" max="10"> lineWidth：<span id="j-line">1</span></p>
+    <p><input type="range" value="10" id="j-num-input" max="30"> 对称次数：<span id="j-num">10</span></p>
+
 	<div id="generate">生成</div>
 
 	<script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
