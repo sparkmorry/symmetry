@@ -188,7 +188,6 @@ var draw = function(){
         ctx.beginPath();
         ctx.moveTo(Gpos[i][k].x, Gpos[i][k].y);
         ctx.strokeStyle = color;
-
         ctx.lineCap = 'round';
         ctx.lineWidth = lineWidth;
         ctx.lineTo(Gpos[i-1][k].x, Gpos[i-1][k].y);
