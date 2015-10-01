@@ -219,9 +219,9 @@ var draw = function(){
 //   } 
  
 // }
-// $('body').bind('touchmove',function(event){
-//   event.preventDefault();
-// });
+$('#canvas').bind('touchmove',function(event){
+  event.preventDefault();
+});
 init();
 
 var jQline = $("#j-line"), jQnum = $("#j-num")
