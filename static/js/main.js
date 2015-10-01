@@ -217,3 +217,7 @@ $("#j-num-input").bind('change', function(){
   num = parseInt($(this).val());
   jQnum.text(num);
 });
+
+$("#redraw").bind('click', function(){
+  window.location.reload();
+})
