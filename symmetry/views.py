@@ -8,3 +8,7 @@ import json
 def home(request):
 	js='main'
 	return render_to_response('index.html', {'js': js})
+
+def intro(request):
+	js='intro'
+	return render_to_response('intro.html', {'js': js})
