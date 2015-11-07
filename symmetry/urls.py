@@ -8,6 +8,8 @@ urlpatterns = patterns('',
     url(r'^$', 'symmetry.views.home', name='home'),
     url(r'^intro/$', 'symmetry.views.intro', name='intro'),
     url(r'^play/$', 'symmetry.views.play', name='play'),
+    url(r'^api/share/$', 'symmetry.work.views.create', name='create'),
+
 
 
     # url(r'^blog/', include('blog.urls')),

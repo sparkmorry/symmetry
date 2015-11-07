@@ -219,4 +219,17 @@ $("#j-num-input").bind('change', function(){
 
 $("#redraw").bind('click', function(){
   window.location.reload();
+});
+
+$("#share").bind('click', function(){
+  var jsonPtns=JSON.stringify(pos); 
+  console.log(jsonPtns);
+  $.post('/api/share/', {
+    pnts: jsonPtns,
+    author: 'morry'
+  }, function(ret){
+    if(ret.code==0){
+      alert("分享成功！")
+    }
+  })
 })
