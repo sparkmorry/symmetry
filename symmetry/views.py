@@ -12,3 +12,7 @@ def home(request):
 def intro(request):
 	js='intro'
 	return render_to_response('intro.html', {'js': js})
+
+def play(request):
+	js='play'
+	return render_to_response('play.html', {'js': js})
