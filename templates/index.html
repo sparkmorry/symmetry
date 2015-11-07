@@ -12,6 +12,8 @@
         html, body{
             min-height: 100%;
             overflow: hidden;
+            background-color: #292b37;
+            color: #a5a9ac;
         }
     	#canvas{
    			border:solid 1px black;
@@ -21,36 +23,43 @@
                 background: black;  
                 margin-top: 10px;	
             }
-        #generate, #redraw{
-            margin-top: 30px;
-            width: 80%;
+        .btn{
+            width: 44%;
             color: white;
-            height: 30px;
-            line-height: 30px;
-            border-radius: 4px;
-            margin-left: auto;
-            margin-right: auto;
-            background: black;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 10px;
+            margin: 5px 0.6%;
+            background: #373a43;
+            border: solid 2px #272a31; 
             text-align: center;
+            display: inline-block;
+            color: #04aa7c;
         }
         p{
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
+            /*line-height: 30px;*/
+
         }
-        #redraw{
-            margin-top: 10px;
+        #generate, #more{
+            margin-left: 3%;
         }
     </style>
 </head>
 <body>
 
 	<canvas id="canvas"></canvas>
-    <p><input type="range" value="1" id="j-line-input" max="10"> lineWidth：<span id="j-line">1</span></p>
-    <p><input type="range" value="10" id="j-num-input" max="30"> 对称次数：<span id="j-num">10</span></p>
+    <p>重复次数：<span id="j-num">10</span></p>
+    <p style="margin-bottom:20px"><input type="range" value="10" style="width:200px;" id="j-num-input" max="30"> </p>
 
-	<div id="generate">生成</div>
-    <div id="redraw">重新绘制</div>
+	<div class="btn" id="generate" style="color:#a5a9ac">生成</div>
+    <div class="btn" id="redraw">重绘</div>
+    <div class="btn" id="more">更多示例</div>
+    <div class="btn" id="" style="color: #45d2b0;">分享作品</div>
 
+
+    <p style="margin-bottom:10px">★Inslab制作</p>
 
 	<script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/static/js/main.js"></script>
