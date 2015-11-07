@@ -229,7 +229,8 @@ $("#share").bind('click', function(){
     author: 'morry'
   }, function(ret){
     if(ret.code==0){
-      alert("分享成功！")
+      alert("分享成功！"); 
+      window.location.href="/play/"+ret.data+'/'
     }
   })
 })
