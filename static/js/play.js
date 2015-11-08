@@ -65,7 +65,7 @@ var init = function(){
   // ctx.fillStyle = color;
   ctx.lineJoin = "round";
   ctx.lineWidth = lineWidth;  
-  num=11;
+  num = parseInt($("#num").val());
   i=1;
   count=0;
   $("#play").bind('click', play);

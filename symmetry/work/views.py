@@ -10,9 +10,13 @@ def create(request):
     if request.method == 'POST':
         ptns = request.REQUEST.get('pnts', '')
         author = request.REQUEST.get('author', 'noname')
+        num = request.REQUEST.get('num', 10)
+
+        print num
+
         response_data = {}
 
-        work = Work(author=author, points=ptns)
+        work = Work(author=author, points=ptns, num=num)
         work.save();
 
         wid = work.id

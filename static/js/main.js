@@ -223,10 +223,11 @@ $("#redraw").bind('click', function(){
 
 $("#share").bind('click', function(){
   var jsonPtns=JSON.stringify(pos); 
-  console.log(jsonPtns);
+  console.log(num);
   $.post('/api/share/', {
     pnts: jsonPtns,
-    author: 'morry'
+    author: 'morry',
+    num: num
   }, function(ret){
     if(ret.code==0){
       alert("分享成功！"); 
