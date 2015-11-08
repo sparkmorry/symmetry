@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <style type="text/css">
+
+    	#canvas{
+   			border:solid 1px black;
+                margin: auto;
+                /*width: 300px;*/
+                display: block;  
+                background: black;  
+                margin-top: 10px;	
+            }
+        .btn-small{
+            width: 44%;
+            color: white;
+            height: 50px;
+            border-radius: 10px;
+            margin: 5px 0.6%;
+            background: #373a43;
+            border: solid 2px #272a31; 
+            text-align: center;
+            display: inline-block;
+            color: #04aa7c;
+        }
+        .btn-small img{
+            height: 14px;
+            margin-top: 19px;
+        }
+        p{
+            text-align: center;
+            margin-top: 20px;
+        }
+        #generate, #more{
+            margin-left: 3%;
+        }
+    </style>
+
+	<canvas id="canvas"></canvas>
+    <p><img src="/static/images/text/repeat.png" style="height:16px;"><span id="j-num">10</span></p>
+    <p style="margin-bottom:20px"><input type="range" value="10" style="width:80%;" id="j-num-input" max="20" min="2"> </p>
+
+	<div class="btn-small" id="generate"><img src="/static/images/text/generate.png"></div>
+    <div class="btn-small" id="redraw"><img src="/static/images/text/redraw.png"></div>
+    <div class="btn-small" id="more"><img src="/static/images/text/more.png"></div>
+    <div class="btn-small" id="share"><img src="/static/images/text/share.png"></div>
+
+	<script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
+{% endblock %}

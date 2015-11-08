@@ -7,7 +7,7 @@ import json
 
 def home(request):
 	js='main'
-	return render_to_response('index.html', {'js': js})
+	return render_to_response('draw.html', {'js': js})
 
 def intro(request):
 	js='intro'

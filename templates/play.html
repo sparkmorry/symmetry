@@ -1,20 +1,6 @@
-<!doctype html>
-<html>
-<head>
-    <title>symmetry</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+{% extends "base.html" %}
+{% block content %}    
     <style type="text/css">
-        *{
-            padding: 0;
-            margin: 0;
-        }
-        html, body{
-            min-height: 100%;
-            overflow: hidden;
-            background-color: #292b37;
-            color: #a5a9ac;
-        }
     	#canvas{
    			border:solid 1px black;
             margin: auto;
@@ -44,19 +30,29 @@
             display: inline-block;
             color: #45d2b0;
         }
+        .btn img{
+            height: 14px;
+            margin-top: 19px;
+        }
+        .auth{
+            position: absolute;
+            bottom: 20px;
+            margin-left: -50px;
+            left: 50%;
+        }   
     </style>
-</head>
-<body>
 
 	<canvas id="canvas"></canvas>
 
     <p>{{work.author}}作品</p>
-    <div class="btn" id="play">播放</div>
+    <div class="btn" id="play"><img src="/static/images/text/play.png"></div>
+    <a href="/"><div class="btn" style="margin-top:0px;"><img src="/static/images/text/try.png"></div></a>
+
     <input type="hidden" id="pnts" value="{{work.points}}">
 
-    <p style="margin-bottom:10px">★Inslab制作</p>
+            
 
 	<script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/static/js/play.js"></script>
-</body>
-</html>
+{% endblock %}
+
