@@ -221,6 +221,10 @@ $("#redraw").bind('click', function(){
   window.location.reload();
 });
 
+var replay = function(pnts, num){
+
+}
+
 $("#share").bind('click', function(){
   var jsonPtns=JSON.stringify(pos); 
   console.log(num);
