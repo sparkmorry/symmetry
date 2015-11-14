@@ -3,6 +3,8 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from symmetry.work.models import Work
+from django.core.exceptions import ObjectDoesNotExist
+
 
 # Create your views here.
 @csrf_exempt
@@ -31,12 +33,15 @@ def author(request):
         author = request.REQUEST.get('author', 'noname')
 
         response_data = {}
+        try:
+            work = Work.objects.get(id=work_id)
+            work.author = author
+            work.save();
 
-        work = Work.objects.get(id=work_id)
-        work.author = author
-        work.save();
-
-        response_data['code']=0
-        response_data['data'] = work_id
+            response_data['code']=0
+            response_data['data'] = work_id
+        except ObjectDoesNotExist:
+            response_data['code']=1
+            response_data['msg'] = "该作品不存在"
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
