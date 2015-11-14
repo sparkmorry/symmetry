@@ -18,6 +18,10 @@ def more(request):
 	works = Work.objects.all()[0:6]
 	return render_to_response('more.html', {'js': js, 'works': works})
 
+def name(request, work_id):
+	js='name'
+	return render_to_response('name.html', {'js': js, 'work_id': work_id})
+
 def play(request, id):
 	js='play'
 	work = Work.objects.get(id=id)

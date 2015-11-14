@@ -228,14 +228,19 @@ var replay = function(pnts, num){
 $("#share").bind('click', function(){
   var jsonPtns=JSON.stringify(pos); 
   console.log(num);
-  $.post('/api/share/', {
-    pnts: jsonPtns,
-    author: 'morry',
-    num: num
-  }, function(ret){
-    if(ret.code==0){
-      alert("保存成功！"); 
-      window.location.href="/play/"+ret.data+'/'
-    }
-  })
+  if(pos.length>0){
+    $.post('/api/share/', {
+      pnts: jsonPtns,
+      author: 'morry',
+      num: num
+    }, function(ret){
+      if(ret.code==0){
+        alert("保存成功！"); 
+        window.location.href="/play/"+ret.data+'/'
+      }
+    })    
+  }else{
+    alert("请在画板上绘制后保存！");
+  }
+
 })
