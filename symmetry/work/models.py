@@ -18,5 +18,5 @@ class Work(models.Model):
         verbose_name_plural = '作品'
 
     def __unicode__(self):
-        return self.title
+        return self.id
 

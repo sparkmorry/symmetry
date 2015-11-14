@@ -15,7 +15,8 @@ def intro(request):
 
 def more(request):
 	js='more'
-	return render_to_response('more.html', {'js': js})
+	work = Work.objects.get(id=1)
+	return render_to_response('more.html', {'js': js, 'work': work})
 
 def play(request, id):
 	js='play'

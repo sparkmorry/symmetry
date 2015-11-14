@@ -22,19 +22,23 @@
             margin-top: 20px;
         }
         .auth{
-            position: absolute;
-            bottom: 20px;
-            margin-left: -50px;
-            left: 50%;
+            margin-bottom: 10px;
         }   
         .btn-text{
             height: 14px;            
             margin-top: 19px;
         } 
+        #canvas{
+            border:solid 1px black;
+            margin: auto;
+            /*width: 300px;*/
+            display: block;  
+            background: black;  
+        }
     </style>
-    <img style="width:100%" src="/static/images/intro.png">
+    <canvas id= "canvas"></canvas>
     <ul style="margin-top:10px;">
-        <li class="btn-small" data-id="1"><img class="btn-text" src="/static/images/text/1.png"></li>
+        <li class="btn-small" data-num="{{work.num}}" data-pnts="{{work.points}}"><img class="btn-text" src="/static/images/text/1.png"></li>
         <li class="btn-small" data-id="2"><img class="btn-text" src="/static/images/text/2.png"></li>
         <li class="btn-small" data-id="3"><img class="btn-text" src="/static/images/text/3.png"></li>
         <li class="btn-small" data-id="4"><img class="btn-text" src="/static/images/text/4.png"></li>
@@ -42,4 +46,6 @@
         <li class="btn-small" data-id="6"><img class="btn-text" src="/static/images/text/6.png"></li>
     </ul>
     <a href="/draw"><div class="btn-large"><img class="btn-text" src="/static/images/text/return.png"></div></a>
+    <script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="/static/js/more.js"></script>
 {% endblock %}
