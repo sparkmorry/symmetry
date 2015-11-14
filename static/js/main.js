@@ -228,7 +228,7 @@ var replay = function(pnts, num){
 $("#share").bind('click', function(){
   var jsonPtns=JSON.stringify(pos); 
   console.log(num);
-  if(pos.length>0){
+  if(pos.length>1){
     $.post('/api/share/', {
       pnts: jsonPtns,
       author: 'morry',
@@ -236,7 +236,7 @@ $("#share").bind('click', function(){
     }, function(ret){
       if(ret.code==0){
         alert("保存成功！"); 
-        window.location.href="/play/"+ret.data+'/'
+        window.location.href="/name/"+ret.data+'/'
       }
     })    
   }else{

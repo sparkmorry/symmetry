@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+    <style type="text/css">
+        .btn-large{
+            width: 90%;
+            color: white;
+            height: 50px;
+            line-height: 50px;
+            margin: 5px 5%;
+            margin-top: 30px;
+            background: #373a43;
+            border: solid 2px #272a31; 
+            border-radius: 10px;
+            text-align: center;
+            display: inline-block;
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        p{
+            text-align: center;
+            margin-top: 20px;
+        }
+        .auth{
+            position: absolute;
+            bottom: 20px;
+            margin-left: -50px;
+            left: 50%;
+        }   
+        .btn-text{
+            height: 14px;            
+            margin-top: 19px;
+        } 
+        input{
+            width: 200px;
+            display: block;
+            margin: 20px auto;
+            border:none;
+            padding: 10px 20px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.8);
+        }
+        input:focus{
+            border: none;
+            outline: none;
+        }
+    </style>
+    <p>请输入您的姓名或昵称</p>
+    <input id="name" type="text">
+    <div id="preview" class="btn-large" data-id="{{work_id}}">查 看</div>
+    <script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="/static/js/name.js"></script>
+{% endblock %}

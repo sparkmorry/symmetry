@@ -32,7 +32,7 @@ def author(request):
 
         response_data = {}
 
-        work = Work.objects().get(id=work_id)
+        work = Work.objects.get(id=work_id)
         work.author = author
         work.save();
 
