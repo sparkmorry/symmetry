@@ -53,6 +53,8 @@ var lineWidth = 1;
 var angleRotate;
 
 var canvas = document.getElementById("canvas");
+var ctx=canvas.getContext("2d");
+
 var width = windowW, height=windowW;
 canvas.width = width;
 canvas.height = height;
@@ -84,16 +86,9 @@ var draw = function(){
 
 var play = function(pnts, tnum, canvas){
 	num = tnum;
-	count = 0;
 	pos = pnts;
 	Gpos = [];
-	magic, ctx;
-	lineWidth = 1;
-
-	ctx=canvas.getContext("2d");
-	ctx.strokeStyle = color;
-	ctx.lineJoin = "round";
-	ctx.lineWidth = lineWidth; 
+	var magic;
 	angleRotate=2*Math.PI/num;
 
 	i=1;
@@ -112,12 +107,15 @@ var play = function(pnts, tnum, canvas){
 
    drawOn=true;
    Btime=(new Date()).getTime();
+   ctx.clearRect(0,0,width,height);
    drawTimer = setInterval(draw, 40);
 }
 
 $("li").bind('click', function(){
 	var num = parseInt($(this).data('num'));
 	var pnts = $(this).data('pnts');
-	play(pnts, num, canvas);
+	if(pnts && num){
+		play(pnts, num, canvas);
+	}
 
 })

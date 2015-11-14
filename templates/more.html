@@ -38,12 +38,9 @@
     </style>
     <canvas id= "canvas"></canvas>
     <ul style="margin-top:10px;">
-        <li class="btn-small" data-num="{{work.num}}" data-pnts="{{work.points}}"><img class="btn-text" src="/static/images/text/1.png"></li>
-        <li class="btn-small" data-id="2"><img class="btn-text" src="/static/images/text/2.png"></li>
-        <li class="btn-small" data-id="3"><img class="btn-text" src="/static/images/text/3.png"></li>
-        <li class="btn-small" data-id="4"><img class="btn-text" src="/static/images/text/4.png"></li>
-        <li class="btn-small" data-id="5"><img class="btn-text" src="/static/images/text/5.png"></li>
-        <li class="btn-small" data-id="6"><img class="btn-text" src="/static/images/text/6.png"></li>
+        {% for work in works %}
+            <li class="btn-small" data-num="{{work.num}}" data-pnts="{{work.points}}"><img class="btn-text" src="/static/images/text/{{forloop.counter}}.png"></li>
+        {% endfor %}
     </ul>
     <a href="/draw"><div class="btn-large"><img class="btn-text" src="/static/images/text/return.png"></div></a>
     <script type="text/javascript" src="/static/js/lib/jquery/jquery-1.8.2.min.js"></script>
