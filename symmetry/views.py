@@ -13,6 +13,10 @@ def intro(request):
 	js='intro'
 	return render_to_response('intro.html', {'js': js})
 
+def more(request):
+	js='more'
+	return render_to_response('more.html', {'js': js})
+
 def play(request, id):
 	js='play'
 	work = Work.objects.get(id=id)

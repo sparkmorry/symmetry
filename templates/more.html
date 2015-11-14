@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    <style type="text/css">
+        .btn-small, .btn-large{
+            width: 30%;
+            color: white;
+            height: 50px;
+            line-height: 50px;
+            margin: 5px 0.5%;
+            /*margin-top: 30px;*/
+            background: #373a43;
+            border: solid 2px #272a31; 
+            border-radius: 10px;
+            text-align: center;
+            display: inline-block;
+        }
+        .btn-large{
+            width: 96%;
+        }
+        p{
+            text-align: center;
+            margin-top: 20px;
+        }
+        .auth{
+            position: absolute;
+            bottom: 20px;
+            margin-left: -50px;
+            left: 50%;
+        }   
+        .btn-text{
+            height: 14px;            
+            margin-top: 19px;
+        } 
+    </style>
+    <img style="width:100%" src="/static/images/intro.png">
+    <ul style="margin-top:10px;">
+        <li class="btn-small" data-id="1"><img class="btn-text" src="/static/images/text/1.png"></li>
+        <li class="btn-small" data-id="2"><img class="btn-text" src="/static/images/text/2.png"></li>
+        <li class="btn-small" data-id="3"><img class="btn-text" src="/static/images/text/3.png"></li>
+        <li class="btn-small" data-id="4"><img class="btn-text" src="/static/images/text/4.png"></li>
+        <li class="btn-small" data-id="5"><img class="btn-text" src="/static/images/text/5.png"></li>
+        <li class="btn-small" data-id="6"><img class="btn-text" src="/static/images/text/6.png"></li>
+    </ul>
+    <a href="/draw"><div class="btn-large"><img class="btn-text" src="/static/images/text/return.png"></div></a>
+{% endblock %}
