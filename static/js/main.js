@@ -235,7 +235,7 @@ $("#share").bind('click', function(){
       num: num
     }, function(ret){
       if(ret.code==0){
-        alert("保存成功！"); 
+        // alert("保存成功！"); 
         window.location.href="/name/"+ret.data+'/'
       }
     })    

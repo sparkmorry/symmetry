@@ -66,15 +66,10 @@ var init = function(){
   ctx.lineJoin = "round";
   ctx.lineWidth = lineWidth;  
   num = parseInt($("#num").val());
-  i=1;
-  count=0;
-  $("#play").bind('click', play);
-}
-var play = function(){
-	angleRotate=2*Math.PI/num;
-	magic = new Transform(num,width/2,height/2);
-	pos = JSON.parse($("#pnts").val());
-	count = pos.length;
+  angleRotate=2*Math.PI/num;
+  magic = new Transform(num,width/2,height/2);
+  pos = JSON.parse($("#pnts").val());
+  count = pos.length;
     for(var i=0;i<count;i++){
      magic.trans(pos[i].x,pos[i].y);
      var tmp = [];
@@ -84,10 +79,16 @@ var play = function(){
      }
      Gpos[i] = tmp;
    }
-   // console.log(Gpos);
-   drawOn=true;
-   Btime=(new Date()).getTime();
-   drawTimer = setInterval(draw, 40);
+  $("#play").bind('click', play);
+
+}
+var play = function(){
+  i=1;
+  ctx.clearRect(0,0,width,height);
+  drawOn=true;
+  Btime=(new Date()).getTime();
+  if(drawTimer) clearInterval(drawTimer);
+  drawTimer = setInterval(draw, 40);
 };
 
 
