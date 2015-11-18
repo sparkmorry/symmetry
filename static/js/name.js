@@ -8,6 +8,7 @@ $("#preview").bind('click', function(){
 			author: name
 		}, function(ret){
 			if(ret.code==0){
+				alert("上传成功!");
 				window.location.href="/play/"+ret.data+"/";
 			}else{
 				alert(ret.msg)
