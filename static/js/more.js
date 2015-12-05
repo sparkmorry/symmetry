@@ -1,3 +1,5 @@
+var drawInitOn, BItime, initTimer, initControl = false;
+
 function Point(x, y, ctime){
   this.x = x;
   this.y = y;
@@ -83,23 +85,43 @@ var draw = function(){
     clearInterval(drawTimer);
   }   
 }
-var initPos = function(){
-  for(var i=1;i<count;i++){  
-    if( (pos[i-1].x==0&&pos[i-1].y==0) || (pos[i].x==0&&pos[i].y==0)){
-      i++;
-    }else if( !( (pos[i-1].x==0 && pos[i-1].y==0) || (pos[i].x==0 && pos[i].y==0) ) ){
-      ctx.beginPath();
-      ctx.moveTo(pos[i-1].x, pos[i-1].y);
-      ctx.strokeStyle = color;
-      ctx.lineCap = 'round';
-      ctx.lineWidth = lineWidth;
-      ctx.lineTo(pos[i].x, pos[i].y);
-      ctx.strokeStyle = color;
-      ctx.stroke();
-      ctx.closePath();
 
-    } 
-  }
+var drawInit = function(pos){
+  if(drawInitOn){
+    var now = (new Date()).getTime();
+    if(i>=count){
+      drawInitOn=false;
+      i = 1;
+      drawTimer = setInterval(draw, 40);  
+    }else if(drawInitOn&&(now-BItime>pos[i].ctime-pos[i-1].ctime)&&((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
+      i+=1;
+    }else if(drawInitOn&&(now-BItime>pos[i].ctime-pos[i-1].ctime)&&!((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
+        ctx.beginPath();
+        ctx.moveTo(pos[i].x, pos[i].y);
+        ctx.strokeStyle = color;
+        ctx.lineCap = 'round';
+        ctx.lineWidth = lineWidth;
+        ctx.lineTo(pos[i-1].x, pos[i-1].y);
+        ctx.strokeStyle = color;
+        ctx.stroke();
+        ctx.closePath();
+      i+=1;
+    }
+  }else{
+    initControl = true;
+    $("#play").css({"opacity":1})
+    clearInterval(initTimer);
+  }    
+}
+
+var initPos = function(pnts){
+  BItime=(new Date()).getTime();
+  i = 1;
+  drawInitOn = true;
+  if(initTimer) clearInterval(initTimer);
+  initTimer = setInterval(function(){
+    drawInit(pnts);
+  }, 40);
 }
 
 var play = function(pnts, tnum, canvas){
@@ -113,7 +135,7 @@ var play = function(pnts, tnum, canvas){
 	count = pos.length;
   ctx.clearRect(0,0,width,height);
 
-  initPos();
+  initPos(pnts);
 
 	magic = new Transform(num,width/2,height/2);
     for(var k=0;k<count;k++){
@@ -128,9 +150,7 @@ var play = function(pnts, tnum, canvas){
 
    drawOn=true;
    Btime=(new Date()).getTime();
-   setTimeout(function(){
-    drawTimer = setInterval(draw, 40);
-   }, 1000)
+   // drawTimer = setInterval(draw, 40);
 }
 
 $("li").bind('click', function(){

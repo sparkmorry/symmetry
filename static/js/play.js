@@ -89,7 +89,6 @@ var initPos = function(){
   drawInitOn = true;
   if(initTimer) clearInterval(initTimer);
   initTimer = setInterval(drawInit, 40);
-
 }
 var init = function(){
 
