@@ -47,9 +47,9 @@ Transform.prototype.trans = function(x, y) {
      angleStart=Math.PI+Math.atan(dy/dx);
     }
     
-    for(var i=0;i<num;i++){
+    for(var i=0;i<num-1;i++){
       
-      var angleEnd=angleStart-angleRotate*(i);
+      var angleEnd=angleStart-angleRotate*(i+1);
       this.posX[i]=parseInt(this.tarX+l*Math.cos(angleEnd));
       this.posY[i]=this.tarY+parseInt(l*Math.sin(angleEnd));
       
@@ -119,7 +119,7 @@ var draw = function(){
     }else if(drawOn&&(now-Btime>pos[i].ctime-pos[i-1].ctime)&&((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
       i+=1;
     }else if(drawOn&&(now-Btime>pos[i].ctime-pos[i-1].ctime)&&!((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
-      for(var k=0;k<num;k++){
+      for(var k=0;k<num-1;k++){
         ctx.beginPath();
         ctx.moveTo(Gpos[i][k].x, Gpos[i][k].y);
         ctx.strokeStyle = color;
