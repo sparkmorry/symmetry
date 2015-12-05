@@ -56,6 +56,24 @@ Transform.prototype.trans = function(x, y) {
     }
 };
 
+var initPos = function(){
+  for(var i=1;i<count;i++){  
+    if( (pos[i-1].x==0&&pos[i-1].y==0) || (pos[i].x==0&&pos[i].y==0)){
+      i++;
+    }else if( !( (pos[i-1].x==0 && pos[i-1].y==0) || (pos[i].x==0 && pos[i].y==0) ) ){
+      ctx.beginPath();
+      ctx.moveTo(pos[i-1].x, pos[i-1].y);
+      ctx.strokeStyle = color;
+      ctx.lineCap = 'round';
+      ctx.lineWidth = lineWidth;
+      ctx.lineTo(pos[i].x, pos[i].y);
+      ctx.strokeStyle = color;
+      ctx.stroke();
+      ctx.closePath();
+
+    } 
+  }
+}
 var init = function(){
 
   ctx=canvas.getContext("2d");
@@ -80,23 +98,7 @@ var init = function(){
      Gpos[i] = tmp;
    }
 
-  for(var i=1;i<count;i++){  
-    if( (pos[i-1].x==0&&pos[i-1].y==0) || (pos[i].x==0&&pos[i].y==0)){
-      i++;
-    }else if( !( (pos[i-1].x==0 && pos[i-1].y==0) || (pos[i].x==0 && pos[i].y==0) ) ){
-      ctx.beginPath();
-      ctx.moveTo(pos[i-1].x, pos[i-1].y);
-      ctx.strokeStyle = color;
-      ctx.lineCap = 'round';
-      ctx.lineWidth = lineWidth;
-      ctx.lineTo(pos[i].x, pos[i].y);
-      ctx.strokeStyle = color;
-      ctx.stroke();
-      ctx.closePath();
-
-    } 
-  }
-
+   initPos();
 
   $("#play").bind('click', play);
 

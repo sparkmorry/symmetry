@@ -30,9 +30,9 @@ Transform.prototype.trans = function(x, y) {
     if(dx<0){
      angleStart=Math.PI+Math.atan(dy/dx);
     }
-    for(var i=0;i<num;i++){
+    for(var i=0;i<num-1;i++){
       
-      var angleEnd=angleStart-angleRotate*(i);
+      var angleEnd=angleStart-angleRotate*(i+1);
       this.posX[i]=parseInt(this.tarX+l*Math.cos(angleEnd));
       this.posY[i]=this.tarY+parseInt(l*Math.sin(angleEnd));
       
@@ -66,7 +66,7 @@ var draw = function(){
     }else if(drawOn&&(now-Btime>pos[i].ctime-pos[i-1].ctime)&&((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
       i+=1;
     }else if(drawOn&&(now-Btime>pos[i].ctime-pos[i-1].ctime)&&!((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
-      for(var k=0;k<num;k++){
+      for(var k=0;k<num-1;k++){
         ctx.beginPath();
         ctx.moveTo(Gpos[i][k].x, Gpos[i][k].y);
         ctx.strokeStyle = color;
@@ -83,6 +83,24 @@ var draw = function(){
     clearInterval(drawTimer);
   }   
 }
+var initPos = function(){
+  for(var i=1;i<count;i++){  
+    if( (pos[i-1].x==0&&pos[i-1].y==0) || (pos[i].x==0&&pos[i].y==0)){
+      i++;
+    }else if( !( (pos[i-1].x==0 && pos[i-1].y==0) || (pos[i].x==0 && pos[i].y==0) ) ){
+      ctx.beginPath();
+      ctx.moveTo(pos[i-1].x, pos[i-1].y);
+      ctx.strokeStyle = color;
+      ctx.lineCap = 'round';
+      ctx.lineWidth = lineWidth;
+      ctx.lineTo(pos[i].x, pos[i].y);
+      ctx.strokeStyle = color;
+      ctx.stroke();
+      ctx.closePath();
+
+    } 
+  }
+}
 
 var play = function(pnts, tnum, canvas){
 	num = tnum;
@@ -93,6 +111,9 @@ var play = function(pnts, tnum, canvas){
 
 	i=1;
 	count = pos.length;
+  ctx.clearRect(0,0,width,height);
+
+  initPos();
 
 	magic = new Transform(num,width/2,height/2);
     for(var k=0;k<count;k++){
@@ -107,8 +128,9 @@ var play = function(pnts, tnum, canvas){
 
    drawOn=true;
    Btime=(new Date()).getTime();
-   ctx.clearRect(0,0,width,height);
-   drawTimer = setInterval(draw, 40);
+   setTimeout(function(){
+    drawTimer = setInterval(draw, 40);
+   }, 1000)
 }
 
 $("li").bind('click', function(){
