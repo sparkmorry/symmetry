@@ -15,7 +15,13 @@ def intro(request):
 
 def more(request):
 	js='more'
-	works = Work.objects.all()[0:6]
+	try:
+		print ' try'
+		works = list(Work.objects.filter(id__in=(16, 17, 19, 21, 15, 20)))
+	except:
+		print ' except'
+
+		works = Work.objects.all()[0:6]
 	return render_to_response('more.html', {'js': js, 'works': works})
 
 def name(request, work_id):
