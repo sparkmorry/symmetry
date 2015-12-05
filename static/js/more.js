@@ -1,4 +1,4 @@
-var drawInitOn, BItime, initTimer, initControl = false;
+var drawInitOn, BItime, initTimer, initControl = true;
 
 function Point(x, y, ctime){
   this.x = x;
@@ -82,6 +82,7 @@ var draw = function(){
       i+=1;
     }
   }else{
+    initControl = true;
     clearInterval(drawTimer);
   }   
 }
@@ -108,8 +109,6 @@ var drawInit = function(pos){
       i+=1;
     }
   }else{
-    initControl = true;
-    $("#play").css({"opacity":1})
     clearInterval(initTimer);
   }    
 }
@@ -122,6 +121,7 @@ var initPos = function(pnts){
   initTimer = setInterval(function(){
     drawInit(pnts);
   }, 40);
+  initControl = false;
 }
 
 var play = function(pnts, tnum, canvas){
@@ -156,8 +156,10 @@ var play = function(pnts, tnum, canvas){
 $("li").bind('click', function(){
 	var num = parseInt($(this).data('num'));
 	var pnts = $(this).data('pnts');
-	if(pnts && num){
-		play(pnts, num, canvas);
-	}
+  if(initControl){
+    if(pnts && num){
+      play(pnts, num, canvas);
+    }   
+  }
 
 })
