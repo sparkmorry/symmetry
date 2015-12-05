@@ -12,6 +12,7 @@ var windowW = $(window).width();
 
 var width = windowW, height=windowW;
 var angleRotate, drawTimer;
+var drawInitOn, BItime, initTimer, initControl = false;
 
 function Point(x, y, ctime){
   this.x = x;
@@ -56,23 +57,39 @@ Transform.prototype.trans = function(x, y) {
     }
 };
 
-var initPos = function(){
-  for(var i=1;i<count;i++){  
-    if( (pos[i-1].x==0&&pos[i-1].y==0) || (pos[i].x==0&&pos[i].y==0)){
-      i++;
-    }else if( !( (pos[i-1].x==0 && pos[i-1].y==0) || (pos[i].x==0 && pos[i].y==0) ) ){
-      ctx.beginPath();
-      ctx.moveTo(pos[i-1].x, pos[i-1].y);
-      ctx.strokeStyle = color;
-      ctx.lineCap = 'round';
-      ctx.lineWidth = lineWidth;
-      ctx.lineTo(pos[i].x, pos[i].y);
-      ctx.strokeStyle = color;
-      ctx.stroke();
-      ctx.closePath();
+var drawInit = function(){
+  if(drawInitOn){
+    var now = (new Date()).getTime();
+    if(i>=count){
+      drawInitOn=false;  
+    }else if(drawInitOn&&(now-BItime>pos[i].ctime-pos[i-1].ctime)&&((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
+      i+=1;
+    }else if(drawInitOn&&(now-BItime>pos[i].ctime-pos[i-1].ctime)&&!((pos[i-1].x==0&&pos[i-1].y==0)||(pos[i].x==0&&pos[i].y==0))){
+        ctx.beginPath();
+        ctx.moveTo(pos[i].x, pos[i].y);
+        ctx.strokeStyle = color;
+        ctx.lineCap = 'round';
+        ctx.lineWidth = lineWidth;
+        ctx.lineTo(pos[i-1].x, pos[i-1].y);
+        ctx.strokeStyle = color;
+        ctx.stroke();
+        ctx.closePath();
+      i+=1;
+    }
+  }else{
+    initControl = true;
+    $("#play").css({"opacity":1})
+    clearInterval(initTimer);
+  }    
+}
 
-    } 
-  }
+var initPos = function(){
+  BItime=(new Date()).getTime();
+  i = 1;
+  drawInitOn = true;
+  if(initTimer) clearInterval(initTimer);
+  initTimer = setInterval(drawInit, 40);
+
 }
 var init = function(){
 
@@ -104,12 +121,14 @@ var init = function(){
 
 }
 var play = function(){
-  i=1;
-  // ctx.clearRect(0,0,width,height);
-  drawOn=true;
-  Btime=(new Date()).getTime();
-  if(drawTimer) clearInterval(drawTimer);
-  drawTimer = setInterval(draw, 40);
+  if(initControl){
+    i=1;
+    // ctx.clearRect(0,0,width,height);
+    drawOn=true;
+    Btime=(new Date()).getTime();
+    if(drawTimer) clearInterval(drawTimer);
+    drawTimer = setInterval(draw, 40); 
+  }
 };
 
 
