@@ -5,7 +5,7 @@ var Gpos = [];
 var magic, ctx;
 var lineWidth = 1;
 var canvas = document.getElementById("canvas");
-
+var jQplay = $("#play");
 // var color = 'rgba(255,255,255,0.7)';
 var color = 'white';
 var windowW = $(window).width();
@@ -152,15 +152,17 @@ var draw = function(){
       i+=1;
     }
   }else{
+    jQplay.css({"opacity": 1});
+    jQplay.bind('click', function(){
+      window.location.reload();
+
+    });
+
     clearInterval(drawTimer);
   }   
 }
 $('#canvas').bind('touchmove',function(event){
   event.preventDefault();
-});
-$("#play").bind('click', function(){
-  window.location.reload();
-
 });
 
 init();
