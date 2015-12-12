@@ -202,7 +202,7 @@ var draw = function(){
   }   
 }
 $('#canvas').bind('touchmove',function(event){
-  event.preventDefault();
+  // event.preventDefault();
 });
 init();
 
