@@ -78,8 +78,8 @@ var drawInit = function(){
     }
   }else{
     initControl = true;
-    $("#play").css({"opacity":1})
     clearInterval(initTimer);
+    play();
   }    
 }
 
@@ -116,7 +116,6 @@ var init = function(){
 
    initPos();
 
-  $("#play").bind('click', play);
 
 }
 var play = function(){
@@ -159,4 +158,9 @@ var draw = function(){
 $('#canvas').bind('touchmove',function(event){
   event.preventDefault();
 });
+$("#play").bind('click', function(){
+  window.location.reload();
+
+});
+
 init();
