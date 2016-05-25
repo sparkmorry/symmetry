@@ -11,7 +11,7 @@ def home(request):
 
 def intro(request):
 	js='intro'
-	return render_to_response('intro.html', {'js': js})
+	return render_to_response('test.html', {'js': js})
 
 def more(request):
 	js='more'

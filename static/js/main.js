@@ -62,7 +62,7 @@ var init = function(){
   canvas.width = width;
   canvas.height = height;
   ctx.strokeStyle = color;
-  // ctx.fillStyle = color;
+  ctx.fillStyle = color;
   ctx.lineJoin = "round";
   ctx.lineWidth = lineWidth;  
   num=10;
@@ -106,13 +106,14 @@ $.fn.drawTouch = function() {
       ctx.moveTo(x, y);
       ctx.strokeStyle = color;
 
-      ctx.lineCap = 'round';
+      // ctx.lineCap = 'round';
       ctx.lineWidth = lineWidth;
       ctx.lineTo(e.pageX - canvasX , e.pageY - canvasY);
+      ctx.closePath();
       ctx.strokeStyle = color;
+      ctx.fillStyle = color;
       // ctx.globalAlpha = 0.2;
       ctx.stroke();
-      ctx.closePath();
       x = e.pageX - canvasX;
       y = e.pageY - canvasY;
       pos.push(new Point(x,y));
@@ -202,7 +203,7 @@ var draw = function(){
   }   
 }
 $('#canvas').bind('touchmove',function(event){
-  // event.preventDefault();
+  event.preventDefault();
 });
 init();
 
